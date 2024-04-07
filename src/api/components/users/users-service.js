@@ -1,6 +1,13 @@
 const usersRepository = require('./users-repository');
 const { hashPassword } = require('../../../utils/password');
 
+async function checkEmailExists(email) {
+  const user = await usersRepository.checkEmailExists(email);
+  if (!user) {
+    return true;
+  } else return false;
+}
+
 /**
  * Get list of users
  * @returns {Array}
@@ -113,4 +120,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  checkEmailExists,
 };

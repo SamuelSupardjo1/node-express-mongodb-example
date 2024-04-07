@@ -1,5 +1,9 @@
 const { User } = require('../../../models');
 
+async function checkEmailExists(email) {
+  return await User.findOne({ email: email });
+}
+
 /**
  * Get a list of users
  * @returns {Promise}
@@ -68,4 +72,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  checkEmailExists,
 };
