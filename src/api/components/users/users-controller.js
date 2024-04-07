@@ -1,6 +1,6 @@
 const usersService = require('./users-service');
 const { errorResponder, errorTypes } = require('../../../core/errors');
-const { checkEmailExists } = require('./users-repository');
+const { checkEmailExists } = require('./users-service');
 
 /**
  * Handle get list of users request
@@ -52,8 +52,10 @@ async function createUser(request, response, next) {
     const email = request.body.email;
     const password = request.body.password;
 
-    const checkEmail = usersService.checkEmailExists(email);
+    const checkEmail = await usersService.checkEmailExists(email);
+    console.log(checkEmail);
     if (!checkEmail) {
+      console.log('false');
       throw errorResponder(errorTypes.EMAIL_ALREADY_TAKEN);
     }
 
@@ -83,6 +85,13 @@ async function updateUser(request, response, next) {
     const id = request.params.id;
     const name = request.body.name;
     const email = request.body.email;
+
+    const checkEmail = await usersService.checkEmailExists(email);
+    console.log(checkEmail);
+    if (!checkEmail) {
+      console.log('false');
+      throw errorResponder(errorTypes.EMAIL_ALREADY_TAKEN);
+    }
 
     const success = await usersService.updateUser(id, name, email);
     if (!success) {

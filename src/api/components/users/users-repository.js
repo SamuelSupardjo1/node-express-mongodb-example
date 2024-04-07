@@ -1,7 +1,7 @@
 const { User } = require('../../../models');
 
 async function checkEmailExists(email) {
-  return await User.findOne({ email: email });
+  return User.findOne({ email: email });
 }
 
 /**

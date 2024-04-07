@@ -2,10 +2,13 @@ const usersRepository = require('./users-repository');
 const { hashPassword } = require('../../../utils/password');
 
 async function checkEmailExists(email) {
-  const user = await usersRepository.checkEmailExists(email);
-  if (!user) {
+  const emailExist = await usersRepository.checkEmailExists(email);
+  console.log(emailExist);
+  if (!emailExist) {
     return true;
-  } else return false;
+  } else {
+    return false;
+  }
 }
 
 /**
