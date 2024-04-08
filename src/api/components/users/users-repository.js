@@ -1,5 +1,18 @@
 const { User } = require('../../../models');
 
+async function changePassword(id, newPassword) {
+  return User.updateOne(
+    {
+      _id: id,
+    },
+    {
+      $set: {
+        password: newPassword,
+      },
+    }
+  );
+}
+
 async function checkEmailExists(email) {
   return User.findOne({ email: email });
 }
@@ -73,4 +86,5 @@ module.exports = {
   updateUser,
   deleteUser,
   checkEmailExists,
+  changePassword,
 };

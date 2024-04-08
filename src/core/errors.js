@@ -67,6 +67,11 @@ const errorTypes = {
     status: 403,
     code: 'INVALID_CREDENTIALS_ERROR',
   },
+  INVALID_OLD_PASSWORD: {
+    description: 'Invalid Old password',
+    status: 403,
+    code: 'INVALID_OLD_PASSWORD_ERROR',
+  },
   INVALID_PASSWORD: {
     description: 'Invalid password',
     status: 403,
