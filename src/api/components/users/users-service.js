@@ -3,18 +3,24 @@ const { hashPassword, passwordMatched } = require('../../../utils/password');
 const { errorResponder, errorTypes } = require('../../../core/errors');
 
 async function changePassword(id, oldPassword, newPassword) {
-  console.log(changePassword);
-  const user = await usersRepository.getUser(id);
-  const matched = await passwordMatched(oldPassword, user.password);
-  if (!matched) {
-    console.log(matched);
-    throw errorResponder(errorTypes.INVALID_PASSWORD);
+  try {
+    console.log('changePassword - service');
+    const hashed = await hashPassword(newPassword);
+    const user = await usersRepository.getUser(id);
+    console.log(user);
+    const matched = await passwordMatched(oldPassword, user.password);
+    if (!matched) {
+      console.log(matched);
+      throw errorResponder(errorTypes.INVALID_PASSWORD);
+    }
+    return await usersRepository.changePassword(id, hashed);
+  } catch (error) {
+    console.log(error);
   }
-  return await usersRepository.changePassword(id, newPassword);
 }
 
 async function checkOldPassword(id, oldPassword) {
-  console.log(checkOldPassword);
+  console.log('checkOldPassword - service');
   const user = await usersRepository.getUser(id);
   if (!user) {
     throw new Error('User not found');

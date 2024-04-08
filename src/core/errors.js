@@ -72,6 +72,11 @@ const errorTypes = {
     status: 403,
     code: 'INVALID_OLD_PASSWORD_ERROR',
   },
+  CHANGEPASSWORD_ERROR: {
+    description: 'Change Name Error',
+    status: 403,
+    code: 'CHANGEPASSWORD_ERROR',
+  },
   INVALID_PASSWORD: {
     description: 'Invalid password',
     status: 403,

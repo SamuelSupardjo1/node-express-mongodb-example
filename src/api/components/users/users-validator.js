@@ -27,7 +27,7 @@ module.exports = {
     body: {
       oldPassword: joi.string().required(),
       newPassword: joi.string().min(6).max(32).required(),
-      confirmNewPassword: joi.string().valid(joi.ref('newPassword')).required(),
+      confirmNewPassword: joi.string().min(6).max(32).required(),
     },
   },
 };
