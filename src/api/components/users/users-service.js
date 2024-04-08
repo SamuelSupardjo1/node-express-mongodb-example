@@ -3,29 +3,23 @@ const { hashPassword, passwordMatched } = require('../../../utils/password');
 const { errorResponder, errorTypes } = require('../../../core/errors');
 
 async function changePassword(id, oldPassword, newPassword) {
-  try {
-    const user = await usersRepository.getUser(id);
-    const matched = await passwordMatched(oldPassword, user.password);
-    if (!matched) {
-      console.log(matched);
-      throw errorResponder(errorTypes.INVALID_PASSWORD);
-    }
-    return await usersRepository.changePassword(id, newPassword);
-  } catch (error) {
-    console.log(error);
+  const user = await usersRepository.getUser(id);
+  const matched = await passwordMatched(oldPassword, user.password);
+  if (!matched) {
+    console.log(matched);
+    throw errorResponder(errorTypes.INVALID_PASSWORD);
   }
+  return await usersRepository.changePassword(id, newPassword);
 }
 
 async function checkOldPassword(id, oldPassword) {
-  try {
-    const user = await usersRepository.getUser(id);
-    if (!user) {
-      throw new Error('User not found');
-    }
-    return await passwordMatched(oldPassword, user.password);
-  } catch (error) {
-    throw new Error('Error checking old password');
+  const user = await usersRepository.getUser(id);
+  if (!user) {
+    throw new Error('User not found');
   }
+  return await passwordMatched(oldPassword, user.password);
+
+  throw new Error('Error checking old password');
 }
 
 async function checkEmailExists(email) {
