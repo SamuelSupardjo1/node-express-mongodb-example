@@ -3,6 +3,7 @@ const { hashPassword, passwordMatched } = require('../../../utils/password');
 const { errorResponder, errorTypes } = require('../../../core/errors');
 
 async function changePassword(id, oldPassword, newPassword) {
+  console.log(changePassword);
   const user = await usersRepository.getUser(id);
   const matched = await passwordMatched(oldPassword, user.password);
   if (!matched) {
@@ -13,6 +14,7 @@ async function changePassword(id, oldPassword, newPassword) {
 }
 
 async function checkOldPassword(id, oldPassword) {
+  console.log(checkOldPassword);
   const user = await usersRepository.getUser(id);
   if (!user) {
     throw new Error('User not found');

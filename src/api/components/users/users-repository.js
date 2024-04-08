@@ -1,6 +1,7 @@
 const { User } = require('../../../models');
 
 async function changePassword(id, newPassword) {
+  console.log(changePassword);
   return User.updateOne(
     {
       _id: id,

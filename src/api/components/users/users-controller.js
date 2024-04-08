@@ -3,6 +3,7 @@ const { errorResponder, errorTypes } = require('../../../core/errors');
 const { checkEmailExists } = require('./users-service');
 
 async function changePassword(request, response, next) {
+  console.log(changePassword);
   const id = request.params.id;
   const oldPassword = request.body.oldPassword;
   const newPassword = request.body.newPassword;
